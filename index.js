@@ -579,13 +579,25 @@ contactBtn.click((e) => {
 
   const inputs = document.querySelectorAll(".form input");
 
-  for (let input of inputs) {
-    input.addEventListener("keyup", function () {
-      if (input.id !== "confirm") {
-        validateInput(this, formRegex[`${this.id}`]);
-      } else {
-        isConfirm(passwordInput, confirmInput);
-      }
+ let passwordField = document.getElementById("password");
+let confirmPasswordField = document.getElementById("confirm");
+
+let passwordInput = passwordField ? passwordField.value : '';
+let confirmInput = confirmPasswordField ? confirmPasswordField.value : '';
+
+for (let input of inputs) {
+  input.addEventListener("keyup", function () {
+    if (input.id !== "confirm") {
+      validateInput(this, formRegex[`${this.id}`]);
+    } else {
+      // Update `passwordInput` and `confirmInput`
+      passwordInput = document.getElementById("password");
+      confirmInput = document.getElementById("confirm");
+
+      // Call the function
+      isConfirm(passwordInput, confirmInput);
+    }
+
       const validInputs = document.querySelectorAll(".is-valid");
       if (validInputs.length == 6) {
         submitBtn.removeAttribute("disabled");
@@ -595,7 +607,7 @@ contactBtn.click((e) => {
     });
   }
 });
-
+// check validation input
 function validateInput(input, regex) {
   let value = input.value;
   if (regex.test(value)) {
@@ -606,6 +618,7 @@ function validateInput(input, regex) {
     input.classList.remove("is-valid");
   }
 }
+// check password
 function isConfirm(passInput, confirmInput) {
   if (confirmInput.value == passInput.value) {
     confirmInput.classList.add("is-valid");
