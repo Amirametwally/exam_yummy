@@ -21,6 +21,10 @@ $("document").ready(function () {
   let categories;
   const body = document.body;
 
+ /**
+  * function  used to display a loading animation while some content is being loaded or processed
+  * then remove the animation once the loading or processing is complete
+  */
   function loadingBuilder(element = body) {
     const loadingContainer = document.createElement("div");
     loadingContainer.className = "loading";
